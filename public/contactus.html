@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="https://cdn.glitch.global/01553f62-8367-440c-813a-d4595efc2989/contactus.png?v=1748107185613"/>
+  <title>Contact Us - JeevaDhara</title>
+
+  <style>
+    :root {
+      --primary: #007b8a;
+      --accent: #00bfa5;
+      --white: #ffffff;
+      --light: rgba(255, 255, 255, 0.9);
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1581093588401-1c76e3fa3cf3') no-repeat center center/cover;
+      padding-top: 120px;
+    }
+
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.85);
+      min-height: 100vh;
+      padding-bottom: 3rem;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem 1rem 2rem;
+      z-index: 100;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+    }
+
+
+    .back-link {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back-link a {
+      color: #2b6777;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+    
+    
+    
+    
+    
+    
+    
+  .back-link {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000; /* keeps it above other elements */
+}
+
+.back-link a {
+  color: #2b6777;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: #e0f7fa;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.back-link a:hover {
+  text-decoration: underline;
+  background-color: #b2ebf2;
+}
+
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .contact-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      justify-content: center;
+    }
+
+    .card {
+      background: var(--light);
+      flex: 1 1 300px;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+      text-align: center;
+      border-top: 5px solid var(--accent);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card i {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0;
+      color: var(--primary);
+    }
+
+    .card p, .card a {
+      margin: 0.3rem 0;
+      font-size: 0.95rem;
+      color: #333;
+      text-decoration: none;
+    }
+
+    form {
+      background: var(--light);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    form label {
+      font-weight: 600;
+      margin-top: 1rem;
+      color: var(--primary);
+    }
+
+    input, textarea {
+      margin-top: 0.4rem;
+      padding: 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 191, 165, 0.3);
+    }
+
+    button {
+      margin-top: 1.8rem;
+      padding: 1rem;
+      background: linear-gradient(to right, var(--accent), var(--primary));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, var(--primary), var(--accent));
+    }
+
+    .socials {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .socials a {
+      display: inline-block;
+      margin: 0 10px;
+      font-size: 1.6rem;
+      color: var(--primary);
+      transition: transform 0.3s ease;
+    }
+
+    .socials a:hover {
+      color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+      .contact-section {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/a2c5a6c4bb.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="overlay">
+    <!-- Header -->
+    <header>
+      <h1>Contact Us</h1>
+      <p>Let us assist you with your health journey</p>
+      <div class="back-link">
+        <a href="index.html">⬅ Back to Home</a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="contact-section">
+        <div class="card">
+          <i class="fas fa-phone-alt"></i>
+          <h3>Call Us</h3>
+          <p>+91 98765 43210</p>
+          <p>+91 91234 56789</p>
+        </div>
+
+        <div class="card">
+          <i class="fas fa-envelope"></i>
+          <h3>Email</h3>
+          <p>support@jeevadhara.in</p>
+          <p>info@jeevadhara.in</p>
+        </div>
+
+        <div class="card">
+          <i class="fas fa-map-marker-alt"></i>
+          <h3>Location</h3>
+          <p>JeevaDhara, Banjara Hills, Hyderabad</p>
+          <p>Mon–Sat: 9 AM to 6 PM</p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <form action="https://formsubmit.co/245122750006@mvsrec.edu.in" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://jeevadhara.glitch.me/thankyou.html">
+
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required placeholder="Enter your full name" />
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required placeholder="yourname@example.com" />
+
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" placeholder="What's this about?" />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required placeholder="Type your message here..."></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+
+      <!-- Social Icons -->
+      <div class="socials">
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/919876543210" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://t.me/yourtelegramusername" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

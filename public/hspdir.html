@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="https://cdn.glitch.global/01553f62-8367-440c-813a-d4595efc2989/image%20(1).png?v=1748105583418"/>
+  <title>Hyderabad Hospital Directory</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f7fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2b6777;
+    }
+
+    p {
+      text-align: center;
+      color: #555;
+    }
+
+    #search-bar {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .hospital-section {
+      margin-top: 30px;
+    }
+
+    .hospital-section h2 {
+      color: #2b6777;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+      text-transform: capitalize;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 12px 0;
+      padding: 8px 12px;
+      background: #f9f9f9;
+      border-radius: 6px;
+    }
+
+    .hospital-name {
+      flex: 1;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    button {
+      background-color: #52ab98;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3c8d84;
+    }
+
+    .status {
+      font-weight: bold;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back-link a {
+      color: #2b6777;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+    
+    
+    
+    
+    
+    
+    
+  .back-link {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000; /* keeps it above other elements */
+}
+
+.back-link a {
+  color: #2b6777;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: #e0f7fa;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.back-link a:hover {
+  text-decoration: underline;
+  background-color: #b2ebf2;
+}
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </style>
+  <script>
+    function toggleStatus(button) {
+      const statusEl = button.parentElement.querySelector('.status');
+      const available = Math.random() > 0.5;
+      statusEl.textContent = available ? 'Available 🟢' : 'Full 🔴';
+      statusEl.style.color = available ? 'green' : 'red';
+    }
+
+function searchHospitals() {
+  const input = document.getElementById('search-bar').value.toLowerCase();
+  const sections = document.querySelectorAll('.hospital-section');
+
+  sections.forEach(section => {
+    let matchCount = 0;
+    const hospitalItems = section.querySelectorAll('li');
+
+    hospitalItems.forEach(item => {
+      const name = item.querySelector('.hospital-name').textContent.toLowerCase();
+      const isMatch = name.includes(input);
+      item.style.display = isMatch ? 'flex' : 'none';
+      if (isMatch) matchCount++;
+    });
+
+    // Hide the whole city section if no hospitals match
+    section.style.display = matchCount > 0 ? '' : 'none';
+  });
+}
+
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>🏥 Hyderabad Hospital Directory</h1>
+    <p>Browse hospitals area-wise and check bed availability.</p>
+
+    <input type="text" id="search-bar" placeholder="🔍 Search for a hospital..." onkeyup="searchHospitals()" />
+    
+    <div class="back-link">
+      <a href="index.html">⬅ Back to Home</a>
+    </div>
+
+    <!-- Madhapur -->
+    <div class="hospital-section">
+      <h2>Madhapur</h2>
+      <ul>
+        <li><span class="hospital-name">Continental Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Care Hospitals Hi-Tech City</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Image Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Oakridge Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+    <!-- Banjara Hills -->
+    <div class="hospital-section">
+      <h2>Banjara Hills</h2>
+      <ul>
+        <li><span class="hospital-name">Apollo Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Star Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Virinchi Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Citi Neuro Centre</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+
+    <div class="hospital-section">
+      <h2>Begumpet</h2>
+      <ul>
+        <li><span class="hospital-name">Yashoda Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">KIMS Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">MaxCure Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">South Central Railway Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+    <div class="hospital-section">
+      <h2>Kukatpally</h2>
+      <ul>
+        <li><span class="hospital-name">Prathima Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">SLG Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Anupama Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Sumana Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+    <div class="hospital-section">
+      <h2>LB Nagar</h2>
+      <ul>
+        <li><span class="hospital-name">Aware Gleneagles Global Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Vasan Eye Care</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Sunrise Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">LifeSpring Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+    
+    
+    
+    
+    
+    
+    <div class="hospital-section">
+      <h2>Santoshnaga</h2>
+      <ul>
+        <li><span class="hospital-name">Nishitha Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name"> shreya City Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Om Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">vayu Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+    <div class="hospital-section">
+      <h2>Serilingampally</h2>
+      <ul>
+        <li><span class="hospital-name">Lifestyle Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">24 Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">aruvedha Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Citi  Centre</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+    <div class="hospital-section">
+      <h2>Film nagar</h2>
+      <ul>
+        <li><span class="hospital-name">Yashoda Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">KIMS Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">MaxCure Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">South Central Railway Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+    <div class="hospital-section">
+      <h2>Kuka pally</h2>
+      <ul>
+        <li><span class="hospital-name">Prathima Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">SLG Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Anupama Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Sumana Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+    <div class="hospital-section">
+      <h2>Vanasthalipuram</h2>
+      <ul>
+        <li><span class="hospital-name">Aware Gleneagles Global Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Vasan Eye Care</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Sunrise Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">LifeSpring Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+    <div class="hospital-section">
+      <h2>Ammapet</h2>
+      <ul>
+        <li><span class="hospital-name">pranavi Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">sharanya Hospitals Hi-Tech City</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">mintu Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">uday Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+    <div class="hospital-section">
+      <h2>Banjara Hills</h2>
+      <ul>
+        <li><span class="hospital-name">Apollo Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Star Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Virinchi Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Citi Neuro Centre</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+    <div class="hospital-section">
+      <h2>jubli hills</h2>
+      <ul>
+        <li><span class="hospital-name">Yashod Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">sims Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Cure Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">South  Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+    <div class="hospital-section">
+      <h2>Khairatabad</h2>
+      <ul>
+        <li><span class="hospital-name">Pranith Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">vaish Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">rishitha Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Suma Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+    <div class="hospital-section">
+      <h2>Musheerabad</h2>
+      <ul>
+        <li><span class="hospital-name"> Global Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Vision Eye Care</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Rise Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Life Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+    <div class="hospital-section">
+      <h2>Sanathnagar</h2>
+      <ul>
+        <li><span class="hospital-name">Jeevadhar Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">jeevan Hospitals Hi-Tech City</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Happy Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+        <li><span class="hospital-name">Hope Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+      </ul>
+    </div>
+
+<div class="hospital-section">
+  <h2>Nampally</h2>
+  <ul>
+    <li><span class="hospital-name">CARE Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Medwin Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Udai Omni Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Government Area Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+  </ul>
+</div>
+
+
+<div class="hospital-section">
+  <h2>Charminar</h2>
+  <ul>
+    <li><span class="hospital-name">Government Nizamia General Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Alpha Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Rainbow Children's Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Princess Esra Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+  </ul>
+</div>
+
+
+ <div class="hospital-section">
+  <h2>Kondapur</h2>
+  <ul>
+    <li><span class="hospital-name">KIMS Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Sri Sri Holistic Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Rainbow Children's Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Apollo Spectra Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Apollo Cradle Children's Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Health Valley Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Sai Neha Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Eledent International Dental Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Haritha Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Align Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+  </ul>
+</div>
+
+
+<div class="hospital-section">
+  <h2>Shamshabad</h2>
+  <ul>
+    <li><span class="hospital-name">Sunrise Hospitals</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Trident Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">St. Theresa's Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Sri Shanthi Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Srinivasa Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Indira Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Lims Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Plutus Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Aradhana Dental Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+    <li><span class="hospital-name">Gayathri Hospital</span><div class="controls"><button onclick="toggleStatus(this)">Check</button><span class="status"></span></div></li>
+  </ul>
+</div>
+
+    
+
+    <div class="back-link">
+      <a href="index.html">⬅ Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>

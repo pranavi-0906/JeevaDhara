@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="https://cdn.glitch.global/01553f62-8367-440c-813a-d4595efc2989/image%20(1).png?v=1748105583418"/>
+  <title>JeevaDhara - Home of Healing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="https://cdn.glitch.global/01553f62-8367-440c-813a-d4595efc2989/logo.png?v=1746376125310" alt="Logo" width="350" height="250" class="nav-logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="hspdir.html">Hospitals</a>
+      <a href="#" onclick="openChatbot()">Sanjeevani</a>
+      <a href="contactus.html">Contact Us</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="search-container">
+      <h2>Find Hospitals</h2>
+      <input type="text" id="searchInput" placeholder="Search by name..." onkeyup="filterHospitals()">
+    </div>
+  </section>
+
+  <section class="services" id="main-services">
+    <div class="service-card" onclick="window.location.href='hspdir.html'">
+      <h3>🏥 Hospital Directory</h3>
+      <p>Browse hospitals city-wise and check availability</p>
+    </div>
+    <div class="service-card" onclick="window.location.href='contactus.html'">
+      <h3>👨‍⚕️ Contact Us</h3>
+      <p>Search by specialization or hospital</p>
+    </div>
+    <div class="service-card" onclick="openChatbot()">
+      <h3>💊 Sanjeevani</h3>
+      <p>View and request information and tablet timings</p>
+    </div>
+  </section>
+
+<!-- Chatbot Trigger -->
+<button onclick="toggleChatbot()" style="position:fixed;bottom:40px;right:20px;border:none;background:#00b7ff;padding:10px;border-radius:50%;z-index:9999;cursor:pointer;">
+  <img src="https://cdn.glitch.global/01553f62-8367-440c-813a-d4595efc2989/medical-robot-assistant-warns-of-danger-and-reminds-you-to-take-medications-disease-prevention-concept-concept-of-medicine-of-the-future-personalized-healthcare-ai-enabled-diagnostics-vector-removebg-.png?v=1748014847321" alt="Chat" style="width:58px;height:58px;">
+</button>
+
+<!-- Chatbot Modal -->
+<div class="chatbot-modal" id="chatbot-modal">
+  <div class="chatbot-box">
+    <div class="chatbot-header">
+  <div class="bot-title">
+    <img src="https://thumbs.dreamstime.com/b/d-doctor-icon-white-background-ai-generated-image-content-title-354627067.jpg" alt="Bot" class="bot-logo" />
+    <div>
+      <strong>Sanjeevani</strong><br>
+      <span class="online">Online</span>
+    </div>
+  </div>
+  <button class="close-btn" onclick="closeChatbot()">✖</button>
+</div>
+
+    <div id="chat-window" class="chat-window">
+<div class="bot-msg-wrapper">
+  <img src="https://thumbs.dreamstime.com/b/d-doctor-icon-white-background-ai-generated-image-content-title-354627067.jpg" class="bot-avatar" alt="Bot Avatar">
+  <div class="bot-msg-content">
+    <div class="bot-bubble">
+      Welcome to Sanjeevani! I'm your assistant 👩‍⚕️<br>Type your question.
+    </div>
+  </div>
+</div>
+
+
+    </div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Type your message..." />
+      <button onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+</div>
+
+
+  <section class="services" id="top-hospitals">
+    <div class="top-hospitals-container">
+      <!-- Repeat: hospital-card class added to all cards -->
+      <div class="service-card hospital-card" onclick="window.location.href='apolo.html'">
+        <h3>Apollo Hospitals</h3>
+        <img src="https://www.apollohospitals.com/sites/default/files/2025-02/Apollo-Hospitals-Hyderabad%2C%20Jubilee%20Hills.jpg" width="50" height="300" alt="Apollo" />
+        <p>Apollo Hospitals in Jubilee Hills is a leader in multi-specialty healthcare. With cutting-edge technology and a team of expert doctors, they provide exceptional care across specialties like cardiology, oncology, and orthopedics...</p>
+      </div>
+      <div class="service-card hospital-card" onclick="window.location.href='hosp.html'">
+        <h3>Yashoda Hospitals</h3>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Yashoda_Hospitals_Somajiguda.jpg/250px-Yashoda_Hospitals_Somajiguda.jpg" width="50" height="300" alt="Yashoda" />
+        <p>Yashoda Hospitals is known for its top-tier medical care and patient-focused approach. Offering expert care in cardiology, neurology, and oncology, Yashoda ensures comprehensive treatment across various specialties...</p>
+      </div>
+      <div class="service-card hospital-card" onclick="window.location.href='care.html'">
+        <h3>Care Hospitals</h3>
+        <img src="https://www.carehospitals.com/assets/images/main/care-hospitals-hitech-city.png" width="50" height="300" alt="Care" />
+        <p>Care Hospitals offers excellent healthcare with advanced technology and skilled professionals. Specializing in cardiology, orthopedics, and neurology, it ensures high-quality treatment in a patient-centered environment...</p>
+      </div>
+      <div class="service-card hospital-card" onclick="window.location.href='kiims.html'">
+        <h3>KIMS Hospital</h3>
+        <img src="https://www.practo.com/consumer-ui/_next/image?url=https%3A%2F%2Fimages1-fabric.practo.com%2Fpractices%2F1238966%2Fkims-hospital-hyderabad-6656d8dd11ab5.jpg&w=3840&q=75" width="50" height="300" alt="KIMS" />
+        <p> KIMS Hospital is known for its world-class infrastructure and clinical excellence. Offering specialized care in cardiology, oncology, and organ transplants, it’s a trusted name in multi-specialty healthcare...</p>
+      </div>
+      <div class="service-card hospital-card" onclick="window.location.href='aig.html'">
+        <h3>AIG Hospitals</h3>
+        <img src="https://fgglass.com/upload/Image/Project/Banner/Cover.jpg" width="50" height="300" alt="AIG" />
+        <p> AIG Hospitals is Asia’s largest private gastroenterology center. It excels in treating digestive diseases, liver care, and GI oncology, using the latest technology and minimally invasive procedures for optimal results...</p>
+      </div>
+      <div class="service-card hospital-card" onclick="window.location.href='continental.html'">
+        <h3>Continental Hospitals</h3>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTb5e96sS5EMkE7jESWG81rUSpqQkIhx8SFg&s" width="50" height="300" alt="Continental" />
+        <p>Continental Hospitals is known for its cutting-edge technology and patient-centric care. Specializing in robotic surgeries and advanced diagnostics, it offers world-class healthcare across a range of specialties...</p>
+      </div>
+      <div class="service-card hospital-card" onclick="window.location.href='sunshinehosp.html'">
+        <h3>Sunshine Hospitals</h3>
+        <img src="https://content.jdmagicbox.com/v2/comp/hyderabad/e3/040pxx40.xx40.170605122131.m7e3/catalogue/dr-praful-kilaru-sunshine-hospitals-secunderabad-hyderabad-orthopaedic-doctors-4g7eo7smvs.jpg" width="50" height="300" alt="Sunshine" />
+        <p>Sunshine Hospitals is a leading multi-specialty institution in Hyderabad, offering expert care in orthopedics, cardiology, and neurology. With a focus on modern technology and compassionate care, it delivers top-notch healthcare...</p>
+      </div>
+      <div class="service-card hospital-card" onclick="window.location.href='citizenhosp.html'">
+        <h3>Citizenship Hospitals</h3>
+        <img src="https://www.practicematch.com/sharedfiles/PracticeTrack/documents/3_37372/Hospital1__20220913_121617141_.png" width="50" height="300" alt="Citizenship" />
+        <p>Citizenship Hospitals offers a wide array of medical services with an emphasis on patient care. Known for its advanced technology and highly skilled professionals, it provides expert treatment across specialties....</p>
+      </div>
+      <div class="service-card hospital-card" onclick="window.location.href='rainbow.html'">
+        <h3>Rainbow Hospitals</h3>
+        <img src="https://cdn3.rainbowhospitals.in/branch/about_images/xSC2mgl6tBAGejgEmobKisRSDE7lIN7DeSejaonh.jpg" width="50" height="300" alt="Rainbow" />
+        <p>Rainbow Hospitals specializes in pediatric and maternal care, offering world-class services for newborns, children, and women. With advanced technology and a dedicated team, it provides exceptional healthcare...</p>
+      </div>
+      <div class="service-card hospital-card see-more" onclick="window.location.href='hspdir.html'">
+        <h3>🔍 See More Hospitals</h3>
+        <center class="click">
+          <p>Click to explore more hospitals in Hyderabad</p>
+        </center>
+      </div>
+    </div>
+
+    <!-- Optional: No results message -->
+    <p id="noResults" style="text-align: center; display: none; color: grey;">No matching hospitals found.</p>
+  </section>
+
+<script>
+  function filterHospitals() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const cards = document.querySelectorAll(".hospital-card");
+    const services = document.getElementById("main-services");
+    let visibleCount = 0;
+
+    // Toggle service section visibility with smooth fade
+    if (input.trim().length > 0) {
+      services.classList.add("hidden");
+    } else {
+      services.classList.remove("hidden");
+    }
+
+    // Filter hospital cards
+    cards.forEach(card => {
+      const name = card.querySelector("h3").textContent.toLowerCase();
+      const match = name.includes(input);
+      card.style.display = match ? "block" : "none";
+      if (match) visibleCount++;
+    });
+
+    document.getElementById("noResults").style.display = visibleCount === 0 ? "block" : "none";
+  }
+  function toggleChatbot() {
+  const modal = document.getElementById('chatbot-modal');
+  if (modal.style.display === 'block') {
+    modal.style.display = 'none';
+  } else {
+    modal.style.display = 'block';
+  }
+}
+
+</script>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>

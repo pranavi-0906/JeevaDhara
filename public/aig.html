@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" type="image/png" href="https://cdn.glitch.global/01553f62-8367-440c-813a-d4595efc2989/image%20(1).png?v=1748105583418"/>
+<title>JeevaDhara</title>
+
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #2E86C1;
+      padding: 1rem 2rem;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .navbar .title {
+      font-size: 1.8rem;
+      color: white; 
+      color: white;
+      text-decoration:none;
+      font-weight: bold;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar ul li {
+      margin-left: 2rem;
+    }
+
+    .navbar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .navbar ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .full-block-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .heading-section {
+      padding: 1.5rem;
+      text-align: center;
+      background-color: #f5f5f5;
+    }
+
+    .content-wrapper {
+      display: flex;
+      padding: 2rem;
+      gap: 2rem;
+    }
+
+    .main-content {
+      flex: 3;
+      background-color: #fdfdfd;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .sidebar {
+      flex: 1;
+      background-color: #f0f0f0;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+      .content-wrapper {
+        flex-direction: column;
+      }
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    .hospital-card {
+      background: #f8f8f8;
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .hospital-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .hospital-card img {
+      width: 80px;
+      margin-top: 0.5rem;
+    }
+
+    .doctors-section {
+      padding: 2rem;
+      background-color: #f9f9f9;
+    }
+
+    .doctor-blocks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .doctor {
+      background: white;
+      padding: 1rem;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+      cursor: pointer;
+    }
+
+    .doctor:hover {
+      transform: scale(1.05);
+      border: 2px solid #2E86C1;
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
+      background-color: #f0f8ff;
+    }
+  </style>
+    <script>
+const doctorIndexMaps = {
+  malakpet: [
+    "Dr. A Sharma",
+    "Dr. B Reddy",
+    "Dr. C Rao",
+    "Dr. D Kumar"
+  ],
+  somajiguda: [
+    "Dr. M Paul",
+    "Dr. N Iyer",
+    "Dr. O Verma",
+    "Dr. P Naik"
+  ],
+  secunderabad: ["Dr. I Rao", "Dr. J Rani", "Dr. K Joshi", "Dr. L Dev"], // fill as needed
+  hitech: ["Dr. M Paul",
+    "Dr. N Iyer",
+    "Dr. O Verma",
+    "Dr. P Naik"]         // fill as needed
+};
+
+
+// Map: branch identifier to display prefix used in span ids
+const branches = [
+  {
+    name: "AIG Hospitals, Malakpet",
+    idSuffix: "malakpet",
+    bedSpanId: "bedsCount0"
+  },
+  {
+    name: "AIG Hospitals, Somajiguda",
+    idSuffix: "somajiguda",
+    bedSpanId: "bedsCount1"
+  },
+  {
+    name: "AIG Hospitals, Secunderabad",
+    idSuffix: "secunderabad",
+    bedSpanId: "bedsCount2"
+  },
+  {
+    name: "AIG Hospitals, Hitec City",
+    idSuffix: "hitech",
+    bedSpanId: "bedsCount3"
+  }
+];
+
+fetch("/getHospitalData")
+  .then(res => res.json())
+  .then(hospitals => {
+    branches.forEach(branch => {
+      const hospital = hospitals.find(h => h.name === branch.name);
+
+      // Set bed count
+      const bedSpan = document.getElementById(branch.bedSpanId);
+      if (hospital && bedSpan) {
+        bedSpan.textContent = hospital.beds;
+      }
+
+      // Reset all doctor spans for this hospital
+const doctorNames = doctorIndexMaps[branch.idSuffix] || [];
+
+doctorNames.forEach((_, i) => {
+  const span = document.getElementById(`doctorList${i}_${branch.idSuffix}`);
+  if (span) span.textContent = "Not Available";
+});
+
+if (hospital && Array.isArray(hospital.doctors)) {
+  hospital.doctors.forEach(doc => {
+    const index = doctorNames.findIndex(name => name === doc.doctor);
+    if (index !== -1) {
+      const span = document.getElementById(`doctorList${index}_${branch.idSuffix}`);
+      if (span) {
+        span.textContent = `${doc.start} - ${doc.end}`;
+      }
+    }
+  });
+}
+
+    });
+  })
+  .catch(err => {
+    console.error("Error fetching hospital data:", err);
+  });
+</script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html">
+    <div class="title">JeevaDhara</div>
+    </a>
+    <ul>
+      <li><a href="#doctors">Our Doctors</a></li>
+      <li><a href="https://www.aighospitals.com/" target="_black">Hospital Info</a></li>
+      <li><a href="#reviews-section">Review</a></li>
+      <li><a href="contactus.html">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <img src="https://aighospitals.com/uploads/images/awards_publications/16777516686400757432c7d.jpg" alt="Hospital Banner" class="full-block-image">
+
+  <div class="heading-section">
+    <h2>AIG Hospitals (Hyderabad): Doctors, Treatment, Route, Reviews, Medicines</h2>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="main-content">
+      <p>AIG Hospitals founded by Sharanya is a leading multi-specialty healthcare institution known for its advanced medical facilities, skilled doctors, and patient-centric care. With branches in Somajiguda, Secunderabad, and Malakpet, Yashoda Hospitals offers a wide range of services including cardiology, oncology, neurology, orthopedics, and organ transplantation. The hospital is equipped with state-of-the-art technology and has earned a reputation for clinical excellence, continuous innovation, and compassionate service. It attracts patients not only from across India but also from international locations, making it one of the most trusted names in healthcare in South India.
+</p>
+    </div>
+  </div>
+
+  <!-- Hospital Cards -->
+  <h2 style="text-align:center;">AIG Hospital Branches</h2>
+  <div class="card-grid">
+    <div class="hospital-card" onclick="scrollToSection('Malakpet')">
+      <h3>AIG Hospitals, Malakpet</h3>
+      <p>
+        Beds Avaliable : <span id="bedsCount0"></span>
+      </p>
+    </div>
+    <div class="hospital-card" onclick="scrollToSection('somajiguda')">
+      <h3>AIG Hospitals, Somajiguda</h3>
+            <p>
+        Beds Avaliable : <span id="bedsCount1"></span>
+      </p>
+    </div>
+    <div class="hospital-card" onclick="scrollToSection('secunderabad')">
+      <h3>AIG Hospitals, Secunderabad</h3>
+            <p>
+        Beds Avaliable : <span id="bedsCount2"></span>
+      </p>
+    </div>
+    <div class="hospital-card" onclick="scrollToSection('nagole')">
+      <h3>AIG Hospitals, Hitec City</h3>
+            <p>
+        Beds Avaliable : <span id="bedsCount3"></span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Doctors Section -->
+  <div class="doctors-section" id="doctors">
+    <h2>Doctors at AIG Hospitals, Malakpet</h2>
+    <div class="doctor-blocks" id="Malakpet">
+      <div class="doctor"><img src="data:image/jpeg;base64,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"><h4>Dr. A Sharma</h4><p>Cardiologist</p><p>
+        Timings: <span id="doctorList0_malakpet">Not Available</span>
+        </p></div>
+      <div class="doctor"><img src="data:image/jpeg;base64,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"><h4>Dr. B Reddy</h4><p>Neurologist</p>
+      <p>
+        Timings: <span id="doctorList1_malakpet">Not Available</span>
+        </p></div>
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-C.-Santosh-Kumar.png"><h4>Dr. C Rao</h4><p>Oncologist</p>
+      <p>
+        Timings: <span id="doctorList2_malakpet">Not Available</span>
+        </p></div>
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-D.-Sitaram.png"><h4>Dr. D Kumar</h4><p>Orthopedic</p>
+      <p>
+        Timings: <span id="doctorList3_malakpet">Not Available</span>
+        </p></div>
+    </div>
+  </div>
+
+  <div class="doctors-section" id="somajiguda">
+    <h2>Doctors at AIG Hospitals, Somajiguda</h2>
+    <div class="doctor-blocks">
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-Bharat-Vijay-Purohit.png"><h4>Dr. M Paul</h4><p>Psychiatrist</p>
+      <p>
+        Timings: <span id="doctorList0_somajiguda">Not Available</span>
+        </p></div>
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-Shabarinath-Samudrala.png"><h4>Dr. N Iyer</h4><p>Hematologist</p>
+      <p>
+        Timings: <span id="doctorList1_somajiguda">Not Available</span>
+        </p></div>
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-Sashi-K-Srivastav.png"><h4>Dr. O Verma</h4><p>Gastroenterologist</p>
+      <p>
+        Timings: <span id="doctorList2_somajiguda">Not Available</span>
+        </p></div>
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-Pramod-Kumar-Kuchulakanti.png"><h4>Dr. P Naik</h4><p>Surgeon</p>
+      <p>
+        Timings: <span id="doctorList3_somajiguda">Not Available</span>
+        </p></div>
+    </div>
+  </div>
+
+
+  <div class="doctors-section" id="secunderabad">
+    <h2>Doctors at AIG Hospitals, Secunderabad</h2>
+    <div class="doctor-blocks">
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-A.-Guru-Prakash.png"><h4>Dr. I Rao</h4><p>Nephrologist</p>
+      <p>
+        Timings: <span id="doctorList0_secunderabad">Not Available</span>
+        </p></div>
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-Pramod-Kumar-Kuchulakanti.png"><h4>Dr. J Rani</h4><p>Endocrinologist</p>
+      <p>
+        Timings: <span id="doctorList1_secunderabad">Not Available</span>
+        </p></div>
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-M-S-Aditya.png"><h4>Dr. K Joshi</h4><p>Urologist</p>
+      <p>
+        Timings: <span id="doctorList2_secunderabad">Not Available</span>
+        </p></div>
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-V.-Rajasekhar.png"><h4>Dr. L Dev</h4><p>General Physician</p>
+      <p>
+        Timings: <span id="doctorList3_secunderabad">Not Available</span>
+        </p></div>
+    </div>
+  </div>
+
+  <div class="doctors-section" id="nagole">
+    <h2>Doctors at AIG Hospitals, Hitec city</h2>
+    <div class="doctor-blocks">
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-Bharat-Vijay-Purohit.png"><h4>Dr. M Paul</h4><p>Psychiatrist</p>
+      <p>
+        Timings: <span id="doctorList0_hitech">Not Available</span>
+        </p></div>
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-Shabarinath-Samudrala.png"><h4>Dr. N Iyer</h4><p>Hematologist</p>
+      <p>
+        Timings: <span id="doctorList1_hitech">Not Available</span>
+        </p></div>
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-Sashi-K-Srivastav.png"><h4>Dr. O Verma</h4><p>Gastroenterologist</p>
+      <p>
+        Timings: <span id="doctorList2_hitech">Not Available</span>
+        </p></div>
+      <div class="doctor"><img src="https://www.yashodahospitals.com/wp-content/uploads/2023/08/Dr.-Pramod-Kumar-Kuchulakanti.png"><h4>Dr. P Naik</h4><p>Surgeon</p>
+      <p>
+        Timings: <span id="doctorList3_hitech">Not Available</span>
+        </p></div>
+    </div>
+  </div>
+  <!-- Reviews Section -->
+<!-- Reviews Section -->
+<div id="reviews-section" style="max-width: 700px; margin: 50px auto; font-family: Arial, sans-serif;">
+  <h2 style="text-align: center; margin-bottom: 20px;">⭐ Patient Reviews</h2>
+
+  <!-- Existing Reviews -->
+  <div id="reviews-list">
+    <div class="review-card">
+      <div class="review-header">
+        <strong>Ravi Kumar</strong>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+      </div>
+      <p>Excellent care at Yashoda Hospital, Somajiguda. Staff is professional and friendly.</p>
+    </div>
+    <div class="review-card">
+      <div class="review-header">
+        <strong>Anjali Sharma</strong>
+        <div class="stars">⭐⭐⭐⭐</div>
+      </div>
+      <p>Very good doctors and clean facilities. Highly recommend the dermatology team.</p>
+    </div>
+  </div>
+
+  <!-- Submit New Review -->
+  <div class="review-form">
+    <h4 style="margin-bottom: 10px;">Leave a Review</h4>
+    <form id="review-form">
+      <input type="text" id="reviewer-name" placeholder="Your Name" required>
+      <textarea id="review-text" placeholder="Your review..." rows="3" required></textarea>
+
+      <div class="star-select">
+        <label>Rating:</label>
+        <div class="star-input">
+          <span data-value="1">★</span>
+          <span data-value="2">★</span>
+          <span data-value="3">★</span>
+          <span data-value="4">★</span>
+          <span data-value="5">★</span>
+        </div>
+      </div>
+
+      <input type="hidden" id="review-rating" required>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- CSS -->
+<style>
+  .review-card {
+    background: #f9f9f9;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-bottom: 15px;
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .stars {
+    color: #ffc107;
+    font-size: 1.2rem;
+  }
+
+  .review-form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-top: 30px;
+  }
+
+  .review-form input[type="text"],
+  .review-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+
+  .review-form button {
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .review-form button:hover {
+    background: #0056b3;
+  }
+
+  .star-select {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .star-select label {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  .star-input span {
+    font-size: 1.8rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+    margin-right: 5px;
+  }
+
+  .star-input span.selected,
+  .star-input span.hover {
+    color: #ffc107;
+  }
+</style>
+
+<!-- JavaScript -->
+<script>
+  const form = document.getElementById('review-form');
+  const reviewsList = document.getElementById('reviews-list');
+  const stars = document.querySelectorAll('.star-input span');
+  const ratingInput = document.getElementById('review-rating');
+
+  let selectedRating = 0;
+
+  stars.forEach(star => {
+    star.addEventListener('mouseenter', () => {
+      const val = +star.dataset.value;
+      highlightStars(val);
+    });
+
+    star.addEventListener('mouseleave', () => {
+      highlightStars(selectedRating);
+    });
+
+    star.addEventListener('click', () => {
+      selectedRating = +star.dataset.value;
+      ratingInput.value = selectedRating;
+      highlightStars(selectedRating);
+    });
+  });
+
+  function highlightStars(rating) {
+    stars.forEach(star => {
+      star.classList.toggle('selected', +star.dataset.value <= rating);
+    });
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('reviewer-name').value.trim();
+    const review = document.getElementById('review-text').value.trim();
+    const rating = +ratingInput.value;
+
+    if (!name || !review || rating === 0) {
+      alert('Please fill out all fields and select a rating.');
+      return;
+    }
+
+    const newReview = document.createElement('div');
+    newReview.className = 'review-card';
+    newReview.innerHTML = `
+      <div class="review-header">
+        <strong>${name}</strong>
+        <div class="stars">${'⭐'.repeat(rating)}</div>
+      </div>
+      <p>${review}</p>
+    `;
+
+    reviewsList.prepend(newReview);
+    form.reset();
+    selectedRating = 0;
+    highlightStars(0);
+  });
+  
+  
+  function scrollToSection(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+</script>
+
+  
+
+
+
+   
+
+<div style="display: flex; justify-content: center; margin-top: 30px;">
+  <div style="border: 2px solid #007BFF; padding: 20px 30px; border-radius: 12px; background-color: #f0f8ff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+    <a href="https://www.google.com/maps/dir/17.4227456,78.4269312/AIG+Hospitals,+Survey+No+136,+4%2F5,+Plot+No+2%2F3,+Mindspace+Rd,+P+Janardhan+Reddy+Nagar,+Gachibowli,+Hyderabad,+Telangana+500032/@17.4333255,78.3760402,14z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3bcb93e9fef92467:0x8b77882864ac15d7!2m2!1d78.3663435!2d17.4433696?entry=ttu&g_ep=EgoyMDI1MDQzMC4xIKXMDSoASAFQAw%3D%3D" 
+       target="_blank" 
+       style="font-size: 20px; text-decoration: none; color: #007BFF; font-weight: bold;">
+      📍 View Aig Hospitals on Google Maps
+    </a>
+  </div>
+</div>
+
+
+
+
+</body>
+</html>

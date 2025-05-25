@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hospital Login</title>
+  <link rel="icon" type="image/png" href="https://cdn.glitch.global/01553f62-8367-440c-813a-d4595efc2989/image%20(1).png?v=1748105583418"/>
+  <link rel="stylesheet" href="hosp.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f1f6fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h2, h3 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    select, input[type="password"], input[type="number"], button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #firstTimeNote {
+      text-align: center;
+      font-size: 14px;
+      color: gray;
+      margin-top: 10px;
+    }
+  .hidden {
+      display: none;
+    }
+        .back-link {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back-link a {
+      color: #2b6777;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+    
+    
+    
+    
+    
+    
+    
+  .back-link {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000; /* keeps it above other elements */
+}
+
+.back-link a {
+  color: #2b6777;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: #e0f7fa;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.back-link a:hover {
+  text-decoration: underline;
+  background-color: #b2ebf2;
+}
+     
+  </style>
+  
+  
+  
+  
+  
+  
+  
+  
+</head>
+
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form id="hospitalForm">
+      <label for="hospital">Hospital Name:</label>
+      <select id="hospital" required>
+        <option value="">Select a Hospital</option>
+        <option value="Apollo Hospitals, Malakpet">Apollo Hospitals, Malakpet</option>
+        <option value="Apollo Hospital, Somajiguda">Apollo Hospital, Somajiguda</option>
+        <option value="Apollo Hospitals, Hitec City">Apollo Hospital, Hitec City</option>
+        <option value="Apollo Hospitals, Secunderabad">Apollo Hospitals, Secunderabad</option>
+        <option value="Yashoda Hospitals, Malakpet">Yashoda Hospitals, Malakpet</option>
+        <option value="Yashoda Hospitals, Somajiguda">Yashoda Hospital, Somajiguda</option>
+        <option value="Yashoda Hospitals, Hitec City">Yashoda Hospital, Hitec City</option>
+        <option value="Yashoda Hospitals, Secunderabad">Yashoda Hospitals, Secunderabad</option>
+        <option value="Care Hospitals, Malakpet">Care Hospitals, Malakpet</option>
+        <option value="Care Hospitals, Somajiguda">Care Hospital, Somajiguda</option>
+        <option value="Care Hospitals, Hitec City">Care Hospital, Hitec City</option>
+        <option value="Care Hospitals, Secunderabad">Care Hospitals, Secunderabad</option>
+        <option value="KIMS Hospitals, Malakpet">KIMS Hospitals, Malakpet</option>
+        <option value="KIMS Hospitals, Somajiguda">KIMS Hospital, Somajiguda</option>
+        <option value="KIMS Hospitals, Hitec City">KIMS Hospital, Hitec City</option>
+        <option value="KIMS Hospitals, Secunderabad">KIMS Hospitals, Secunderabad</option>
+        <option value="AIG Hospitals, Malakpet">AIG Hospitals, Malakpet</option>
+        <option value="AIG Hospitals, Somajiguda">AIG Hospital, Somajiguda</option>
+        <option value="AIG Hospitals, Hitec City">AIG Hospital, Hitec City</option>
+        <option value="AIG Hospitals, Secunderabad">AIG Hospitals, Secunderabad</option>
+        <option value="Continental Hospitals, Malakpet">Continental Hospitals, Malakpet</option>
+        <option value="Continental Hospitals, Somajiguda">Continental Hospital, Somajiguda</option>
+        <option value="Continental Hospitals, Hitec City">Continental Hospital, Hitec City</option>
+        <option value="Continental Hospitals, Secunderabad">Continental Hospitals, Secunderabad</option>
+        <option value="Sunshine Hospitals, Malakpet">Sunshine Hospitals, Malakpet</option>
+        <option value="Sunshine Hospitals, Somajiguda">Sunshine Hospital, Somajiguda</option>
+        <option value="Sunshine Hospitals, Hitec City">Sunshine Hospital, Hitec City</option>
+        <option value="Sunshine Hospitals, Secunderabad">Sunshine Hospitals, Secunderabad</option>
+        <option value="Citizenship Hospitals, Malakpet">Citizenship Hospitals, Malakpet</option>
+        <option value="Citizenship Hospitals, Somajiguda">Citizenship Hospital, Somajiguda</option>
+        <option value="Citizenship Hospitals, Hitec City">Citizenship Hospital, Hitec City</option>
+        <option value="Citizenship Hospitals, Secunderabad">Citizenship Hospitals, Secunderabad</option>
+        <option value="Rainbow Hospitals, Malakpet">Rainbow Hospitals, Malakpet</option>
+        <option value="Rainbow Hospitals, Somajiguda">Rainbow Hospital, Somajiguda</option>
+        <option value="Rainbow Hospitals, Hitec City">Rainbow Hospital, Hitec City</option>
+        <option value="Rainbow Hospitals, Secunderabad">Rainbow Hospitals, Secunderabad</option>
+      </select>
+
+      <label for="password">Admin Password:</label>
+      <input type="password" id="password" required />
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p id="firstTimeNote">
+      <b>Note</b>: If the hospital is not listed above, <a href="contactus.html">Contact Us</a> to register.
+    </p>
+
+    <div id="additionalOptions" class="hidden">
+      <h3>Update Bed and Doctor Info</h3>
+
+      <label for="beds">Beds Available:</label>
+      <input type="number" id="beds" required />
+
+      <div id="doctorSection">
+        <!-- Doctor timing entries will go here -->
+      </div>
+
+      <button type="button" id="addDoctorBtn">Add Doctor</button>
+      <button type="button" id="updateBtn">Update</button>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector("form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const hospitalName = document.querySelector("select").value;
+      const password = document.querySelector("input[type='password']").value;
+
+      fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ hospitalName, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+      if (data.message === "Login successful") {
+  alert("Login successful!");
+  document.getElementById("hospitalForm").classList.add("hidden");
+  document.getElementById("additionalOptions").classList.remove("hidden");
+        document.getElementById("addDoctorBtn").click();
+}
+ else {
+          alert("Login failed: " + data.message);
+        }
+      });
+    });
+  </script>
+      <div class="back-link">
+      <a href="index.html">⬅ Back to Home</a>
+    </div>
+<!-- ✅ Flatpickr CSS (in <head> or body) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- ✅ Flatpickr JS: must be BEFORE go.js -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js"></script>
+
+<!-- ✅ Your custom logic that uses flatpickr -->
+<script src="go.js"></script>
+
+</body>
+</html>
